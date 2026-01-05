@@ -191,7 +191,7 @@ export async function estimateGas(
     const formattedBytecode = bytecode.startsWith('0x') ? bytecode : `0x${bytecode}`;
     const factory = new ethers.ContractFactory(abi, formattedBytecode, signer);
 
-    const deploymentData = factory.getDeployTransaction(...constructorArgs);
+    const deploymentData = await factory.getDeployTransaction(...constructorArgs);
     const gasEstimate = await signer.estimateGas(deploymentData);
 
     return gasEstimate;
